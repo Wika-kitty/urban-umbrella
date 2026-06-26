@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Salin d'Aigues-Mortes | A Pink Fairytale in Southern France</title>
+  <!-- 引入法式优雅字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- 引入 AOS 滚动动画库 -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    /* --- Base Settings & Pink Theme --- */
+    :root {
+      --primary-pink: #e6a4b4;
+      --light-pink: #fdf2f4;
+      --deep-purple: #5d4e6d;
+      --text-dark: #333;
+      --text-light: #fff;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text-dark);
+      line-height: 1.6;
+      background-color: var(--light-pink);
+    }
+    
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+    }
+    
+    /* --- French Touch Navigation Bar --- */
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 15px 5%;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 15px rgba(230, 164, 180, 0.2);
+    }
+    
+    /* 法国国旗三色底部装饰线 */
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(to right, #002395 33%, #ffffff 33%, #ffffff 66%, #ED2939 66%);
+    }
+    
+    .logo {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: var(--deep-purple);
+      letter-spacing: 1px;
+      font-family: 'Playfair Display', serif;
+    }
+    
+    nav a {
+      margin-left: 25px;
+      text-decoration: none;
+      color: var(--text-dark);
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    
+    nav a:hover {
+      color: var(--primary-pink);
+    }
+    
+    /* --- Homepage Fullscreen Background --- */
+    .hero-section {
+      height: 100vh;
+      width: 100%;
+      background-image: url('hero-collage.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to bottom, rgba(253,242,244,0.2), rgba(93,78,109,0.5));
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: var(--text-light);
+      padding: 20px;
+    }
+    
+    .hero-title {
+      font-size: 4rem;
+      font-weight: 400;
+      margin-bottom: 15px;
+      text-shadow: 0 2px 15px rgba(0,0,0,0.3);
+    }
+    
+    .hero-subtitle {
+      font-size: 1.3rem;
+      font-weight: 300;
+      opacity: 0.95;
+      letter-spacing: 3px;
+    }
+    
+    /* --- Generic Content Sections --- */
+    .section {
+      padding: 100px 10%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .section-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    
+    .text-block h2 {
+      font-size: 2.5rem;
+      color: var(--deep-purple);
+      margin-bottom: 25px;
+    }
+    
+    .text-block p {
+      color: #555;
+      margin-bottom: 20px;
+      font-size: 1.05rem;
+    }
+    
+    /* Image Container with Hover Zoom Effect */
+    .img-container {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(93, 78, 109, 0.15);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    
+    .img-container:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px rgba(230, 164, 180, 0.3);
+    }
+    
+    .img-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    
+    .img-container:hover img {
+      transform: scale(1.05);
+    }
+    
+    /* --- Featured Experience Section --- */
+    .feature-section {
+      background-color: #fff;
+    }
+    
+    .reverse-grid {
+      direction: rtl;
+    }
+    
+    .reverse-grid > * {
+      direction: ltr;
+    }
+    
+    /* --- Wildlife Photography Section --- */
+    .wildlife-section {
+      padding: 0;
+      position: relative;
+      height: 600px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .wildlife-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('flamingo.png');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.7);
+      z-index: 1;
+    }
+    
+    .wildlife-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: white;
+      max-width: 800px;
+      padding: 60px 50px; /* 增加了上下内边距，以适应更多文字 */
+      background: rgba(230, 164, 180, 0.7);
+      backdrop-filter: blur(8px);
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+    
+    .wildlife-content p {
+      font-size: 1.1rem;
+      opacity: 0.95;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    
+    /* --- Video Section Style --- */
+    .video-section {
+      padding: 100px 10%;
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    .video-section h2 {
+      font-size: 2.5rem;
+      color: var(--deep-purple);
+      margin-bottom: 40px;
+    }
+    
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(93, 78, 109, 0.15);
+      background-color: #000;
+    }
+    
+    .video-wrapper video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    /* --- References Section --- */
+    .references-section {
+      padding: 80px 10%;
+      background-color: var(--primary-pink);
+      text-align: center;
+    }
+    
+    .references-section h2 {
+      font-size: 2rem;
+      color: #fff;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    
+    .references-list {
+      list-style-type: decimal;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: left;
+      padding-left: 20px;
+    }
+    
+    .references-list li {
+      margin-bottom: 15px;
+      color: rgba(255,255,255,0.9);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    
+    .references-list a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      border-bottom: 1px dashed #fff;
+    }
+    
+    .references-list a:hover {
+      border-bottom-style: solid;
+    }
+    
+    /* --- Footer --- */
+    footer {
+      background: var(--deep-purple);
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.9rem;
+    }
+    
+    /* --- Floating Music Player --- */
+    .music-player {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 2000;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--primary-pink);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 5px 20px rgba(230, 164, 180, 0.6);
+      transition: transform 0.3s ease, background 0.3s ease;
+      font-size: 1.5rem;
+    }
+    
+    .music-player:hover {
+      transform: scale(1.1);
+      background: var(--deep-purple);
+    }
+    
+    .music-player.playing {
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(230, 164, 180, 0.7); }
+      70% { box-shadow: 0 0 0 15px rgba(230, 164, 180, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(230, 164, 180, 0); }
+    }
+    
+    /* --- Responsive Adaptation --- */
+    @media (max-width: 768px) {
+      .hero-title { font-size: 2.5rem; }
+      .section-grid { grid-template-columns: 1fr; gap: 40px; }
+      .reverse-grid { direction: ltr; }
+      .wildlife-section { height: 500px; }
+      header { padding: 15px 20px; }
+      .references-section { padding: 50px 5%; }
+      .music-player { bottom: 20px; right: 20px; width: 50px; height: 50px; font-size: 1.2rem; }
+      .video-section { padding: 60px 5%; }
+      .video-section h2 { font-size: 2rem; }
+      .wildlife-content { padding: 40px 30px; } /* 移动端适配 */
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <header data-aos="fade-down">
+    <div class="logo">Salin d'Aigues-Mortes</div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#wildlife">Wildlife</a>
+    </nav>
+  </header>
+
+  <!-- Homepage Fullscreen Background -->
+  <section class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content" data-aos="fade-up" data-aos-duration="1500">
+      <h1 class="hero-title">A Pink Fairytale in Southern France</h1>
+      <p class="hero-subtitle">Explore the Dreamy Colors of the Aigues-Mortes Salt Pans</p>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section">
+    <div class="section-grid">
+      <div class="text-block" data-aos="fade-right" data-aos-duration="1000">
+        <h2>Medieval City & Pink Salt Lakes</h2>
+        <p>Aigues-Mortes is more than just a salt pan; it is a miracle sealed by time. Sturdy medieval walls stand beside the pink waters, reflecting both the vicissitudes of history and the softness of nature.</p>
+        <p>Here, you can stroll through ancient fortifications, feel the historical echoes of the Crusades, and be healed by this dreamlike "Sea of Roses" before your eyes.</p>
+      </div>
+      <div class="img-container" data-aos="fade-left" data-aos-duration="1000">
+        <img src="castle-view.png" alt="Aigues-Mortes City Walls and Salt Lake Reflection">
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience" class="section feature-section">
+    <div class="section-grid reverse-grid">
+      <div class="text-block" data-aos="fade-left" data-aos-duration="1000">
+        <h2>Touch the Earth's Palette</h2>
+        <p>As you approach the lake, you'll discover this is no ordinary body of water. The high salt concentration and special algae work together to give the water its incredible hue.</p>
+        <p>The white salt crystals on the shore contrast sharply with the pinkish-purple water. Every stone and every wave looks like a meticulously crafted piece of art. This is nature's most generous gift and a timeless favorite under photographers' lenses.</p>
+      </div>
+      <div class="img-container" data-aos="fade-right" data-aos-duration="1000">
+        <img src="pink-water.png" alt="Close-up of Pink Water and Shoreline Rocks">
+      </div>
+    </div>
+  </section>
+
+  <!-- Wildlife Section (Updated with new content) -->
+  <section id="wildlife" class="wildlife-section">
+    <div class="wildlife-bg"></div>
+    <div class="wildlife-content" data-aos="zoom-in" data-aos-duration="1200">
+      <h2>Habitat of the Flamingos</h2>
+      
+      <!-- 新增的段落 -->
+      <p>
+        Actually, flamingos can be found in many parts of the world, such as the lakes of the East African Rift, the Andean plateau in South America, and the Caribbean. What makes Aigues-Mortes so special is that, as Europe's first pink flamingo sanctuary, it possesses unique pink salt pans and vast wetlands, providing this beautiful bird with an extremely rare and perfect paradise for foraging and breeding on the European continent.
+      </p>
+      
+      <!-- 原有的段落 -->
+      <p>
+        This is the heart of the Camargue Nature Reserve.<br>
+        Flocks of flamingos forage elegantly in the shallows, the true guardians of this pink wetland.<br>
+        Bring your telephoto lens and capture the beautiful moments where wildness and tranquility coexist.
+      </p>
+    </div>
+  </section>
+
+  <!-- Video Section (Newly Added) -->
+  <section class="video-section">
+    <h2 data-aos="fade-up">Experience the Pink Magic</h2>
+    <div class="video-wrapper" data-aos="fade-up" data-aos-delay="200">
+      <!-- muted: 默认静音防止吓到用户; controls: 显示播放控件; playsinline: 允许在移动端内嵌播放 -->
+      <video src="video.mp4" controls muted playsinline></video>
+    </div>
+  </section>
+
+  <!-- References Section -->
+  <section class="references-section">
+    <h2 data-aos="fade-up">References</h2>
+    <ol class="references-list" data-aos="fade-up" data-aos-delay="200">
+      <li>Avignon et Provence. (2026) The Saltworks of Aigues Mortes in the Camargue. Available at: <a href="https://www.avignon-et-provence.com/en/natural-sites/saltworks-aigues-mortes-camargue" target="_blank">avignon-et-provence.com</a> (Accessed: 25 June 2026).</li>
+      <li>Evendo. (2025) Salin d’Aigues-Mortes: A Journey into the Pink Salt Flats. Available at: <a href="https://evendo.com/locations/france/camargue/landmark/salin-d-aigues-mortes" target="_blank">evendo.com</a> (Accessed: 25 June 2026).</li>
+      <li>GetYourGuide. (2026) Aigues-Mortes: Top Attractions & Travel Tips. Available at: <a href="https://www.getyourguide.com/zh-cn/aigues-mortes-l40711/ttd/" target="_blank">getyourguide.com</a> (Accessed: 25 June 2026).</li>
+      <li>Office de tourisme d’Aigues-Mortes. (2026) Le Salin d'Aigues-Mortes. Available at: <a href="https://ot-aiguesmortes.com/annuaire/le-salin-d-aigues-mortes" target="_blank">ot-aiguesmortes.com</a> (Accessed: 25 June 2026).</li>
+      <li>Wanderlog Staff. (2025) The 9 best sights in Aigues-Mortes. Available at: <a href="https://wanderlog.com/list/geoCategory/1814326/les-meilleures-attractions-%C3%A0-aigues-mortes" target="_blank">wanderlog.com</a> (Accessed: 25 June 2026).</li>
+    </ol>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Salin d'Aigues-Mortes Travel Guide.JiaxinLi2300880124.</p>
+  </footer>
+
+  <!-- Floating Music Player -->
+  <div class="music-player" id="musicToggle" title="Play/Pause Gentle Piano">🎵</div>
+  <!-- 已替换为轻柔钢琴曲直链 -->
+  <audio id="bgMusic" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- 引入 AOS 滚动动画库的 JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // 初始化 AOS 动画
+    AOS.init({ once: true, offset: 150 });
+    
+    // 音乐播放器逻辑
+    const musicToggle = document.getElementById('musicToggle');
+    const bgMusic = document.getElementById('bgMusic');
+    // 设置初始音量，避免吓到用户
+    bgMusic.volume = 0.3;
+    
+    musicToggle.addEventListener('click', () => {
+      if (bgMusic.paused) {
+        bgMusic.play().catch(error => {
+          console.error("播放失败:", error);
+          alert("音乐播放失败，请检查网络或音频链接。");
+        });
+        musicToggle.textContent = '⏸️';
+        musicToggle.classList.add('playing');
+      } else {
+        bgMusic.pause();
+        musicToggle.textContent = '🎵';
+        musicToggle.classList.remove('playing');
+      }
+    });
+  </script>
+</body>
+</html>
